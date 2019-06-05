@@ -35,17 +35,11 @@ class App extends Component {
     }, 3000);
   }
 
-  newMessage = (username, message) => {
-    // this.setState({messages: [...this.state.messages,
-    // [{ 
-    //   type: "incomingMessage",
-    //   content: message,
-    //   username: username 
-    // }])
+  newMessage = (type, username, message) => {
     const newMessage = {
+      type: type,
       content: message,
       username: username,
-      type: "incomingMessage" 
     }
     this.socket.send(JSON.stringify(newMessage));
   }

@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import MessageList from './message_list.jsx'
 
 class Message extends Component {
+  
   render() {
-    console.log(this.props);
     if (this.props.message.type === "incomingMessage") {
       return (
         <div>
@@ -16,8 +16,7 @@ class Message extends Component {
       return (
         <div>  
           <div className="message system">
-          <span className="message-username">{this.props.message.username}</span>
-          <span className="message-content">{this.props.message.content}</span>
+            <span className="message-username">{this.props.message.type} to {this.props.message.username}</span>
           </div>
         </div>);
       }
