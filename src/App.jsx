@@ -11,7 +11,9 @@ class App extends Component {
     
     this.state = {
       currentUser: "",
-      messages: []
+      messages: [],
+      clientNum: 0,
+      clientColor: ""
     };
   }
   
@@ -21,18 +23,27 @@ class App extends Component {
       console.log("connected to server")
     }
     this.socket.onmessage = (event) => {
+      
       const msg = JSON.parse(event.data);
-      const oldMessages = this.state.messages;
-      const newMessages = [...oldMessages, msg];
-      this.setState({messages: newMessages});
+      console.log("message: ", msg);
+
+      if(msg.type) {
+        const oldMessages = this.state.messages;
+        const newMessages = [...oldMessages, msg];
+        this.setState({messages: newMessages});
+      } else {
+        this.setState({clientNum: msg.clientNum});
+        this.setState({clientColor: msg.clientColor});
+      }
+
     } 
-    console.log("componentDidMount <App />");
-    setTimeout(() => {
-      console.log("Simulating incoming message");
-      const newMessage = {id: 8, username: "Michelle", content: "Hello there!"};
-      const messages = this.state.messages.concat(newMessage)
-      this.setState({messages: messages})
-    }, 3000);
+    // console.log("componentDidMount <App />");
+    // setTimeout(() => {
+    //   console.log("Simulating incoming message");
+    //   const newMessage = {id: 8, username: "Michelle", content: "Hello there!"};
+    //   const messages = this.state.messages.concat(newMessage)
+    //   this.setState({messages: messages})
+    // }, 3000);
   }
 
   newMessage = (type, username, message) => {
@@ -40,6 +51,7 @@ class App extends Component {
       type: type,
       content: message,
       username: username,
+      clientColor: this.state.clientColor
     }
     this.socket.send(JSON.stringify(newMessage));
   }
@@ -49,10 +61,10 @@ class App extends Component {
       <div>
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a>
+          <div className="navbar-brand" id="counter">{this.state.clientNum} users online</div>
         </nav>
         <MessageList messages = {this.state.messages}/>
-        <Chatbar currentUser = {this.state.currentUser} 
-                 newMessage={this.newMessage}/>
+        <Chatbar currentUser = {this.state.currentUser} newMessage={this.newMessage}/>
       </div>
     );
   }
