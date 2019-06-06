@@ -3,7 +3,7 @@ class Chatbar extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      username: "",
+      username: props.currentUser,
       message: "",
       type: ""
     }
@@ -12,10 +12,12 @@ class Chatbar extends Component {
   onUsernameChange = (evt) => {
     this.setState({
       username: evt.target.value,
-      type: "postNotification"
+      type: "postNotification",
+      message:`${this.props.currentUser.name} has changed their name to ${evt.target.value}`
     })
     if(evt.keyCode == 13) {
       evt.preventDefault();
+      this.props.newName(evt.target.value)
       this.props.newMessage(this.state.type, this.state.username, this.state.message);
     }
   }

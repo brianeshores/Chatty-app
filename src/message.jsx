@@ -7,6 +7,8 @@ class Message extends Component {
     const style = {
       color: this.props.color
     }
+    const message = this.props.message;
+    console.log("props.currentUser: ", this.props);
 
     function checkUrl(url){
       var arr = [ "jpeg", "jpg", "gif", "png" ];
@@ -15,30 +17,29 @@ class Message extends Component {
      }
 
     
-    if (this.props.message.type === "incomingMessage" && !checkUrl(this.props.message.content)) {
+    if (this.props.message.type === "incomingMessage" && !checkUrl(message.content)) {
       return (
         <div>
           <div className="message">
-            <span style={style} className="message-username">{this.props.message.username}</span>
-            <span className="message-content">{this.props.message.content}</span>
+            <span style={style} className="message-username">{message.username} :</span>
+            <span className="message-content">{message.content}</span>
           </div>
         </div>);
       } 
-      else if (this.props.message.type === "incomingMessage" && checkUrl(this.props.message.content)) {  
+      else if (message.type === "incomingMessage" && checkUrl(message.content)) {  
       return (
         <div>
-          <div className="message">
-            <span style={style} className="message-username">{this.props.message.username}</span>
-            <span className="message-content">{this.props.message.content}</span>
-            <img src={this.props.message.content}/>
+          <div>
+            <span style={style} className="message-username">{message.username} :</span>
+            <img id="images" src={message.content}/>
           </div>
         </div>); 
     }
     else {
       return (
         <div>  
-          <div className="message system">
-            <span className="message-username">{this.props.message.type} to {this.props.message.username}</span>
+          <div className="message">
+            <span className="message-username">{message.content}</span>
           </div>
         </div>);
       }
