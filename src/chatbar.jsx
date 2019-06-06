@@ -10,7 +10,6 @@ class Chatbar extends Component {
   }
 
   onUsernameChange = (evt) => {
-    
     this.setState({
       username: evt.target.value,
       type: "postNotification",
@@ -25,7 +24,6 @@ class Chatbar extends Component {
   }
 
   onMessageChange = (evt) => {
-    
     this.setState({
       message: evt.target.value,
       type: "incomingMessage"
@@ -39,7 +37,6 @@ class Chatbar extends Component {
   }  
   
   render() {
-    
     return (
       <div className="chatbar">
         <input className="chatbar-username" placeholder="Your Name (Optional)" onKeyUp={this.onUsernameChange}/>

@@ -2,21 +2,18 @@ import React, {Component} from 'react';
 import MessageList from './message_list.jsx'
 
 class Message extends Component {
-  
   render() {
     const style = {
       color: this.props.color
     }
     const message = this.props.message;
-    console.log("props.currentUser: ", this.props);
-
+    
     function checkUrl(url){
       var arr = [ "jpeg", "jpg", "gif", "png" ];
       var ext = url.substring(url.lastIndexOf(".")+1);
       return (arr.includes(ext));
      }
 
-    
     if (this.props.message.type === "incomingMessage" && !checkUrl(message.content)) {
       return (
         <div>
@@ -25,15 +22,15 @@ class Message extends Component {
             <span className="message-content">{message.content}</span>
           </div>
         </div>);
-      } 
-      else if (message.type === "incomingMessage" && checkUrl(message.content)) {  
-      return (
+    } 
+    else if (message.type === "incomingMessage" && checkUrl(message.content)) {  
+    return (
+      <div>
         <div>
-          <div>
-            <span style={style} className="message-username">{message.username} :</span>
-            <img id="images" src={message.content}/>
-          </div>
-        </div>); 
+          <span style={style} className="message-username">{message.username} :</span>
+          <img id="images" src={message.content}/>
+        </div>
+      </div>); 
     }
     else {
       return (
@@ -42,7 +39,7 @@ class Message extends Component {
             <span className="message-username">{message.content}</span>
           </div>
         </div>);
-      }
     }
   }
+}
 export default Message;

@@ -19,10 +19,6 @@ class App extends Component {
   socket = new WebSocket(URL);
   
   componentDidMount() {
-    
-    this.socket.onopen= function() {
-    }
-    
     this.socket.onmessage = (event) => {
       
       const msg = JSON.parse(event.data);
@@ -42,11 +38,16 @@ class App extends Component {
       if (msg.clientNum) {
         this.setState({clientNum: msg.clientNum});
       }
+      
+      this.scrollToBottom();
     } 
   }
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
   newMessage = (type, username, message) => {
-    
     const newMessage = {
       type: type,
       username: username,
@@ -58,7 +59,6 @@ class App extends Component {
   }
 
   newName = (newName) => {
-    
     this.setState({currentUser: {name: newName}})
   }
 
@@ -71,6 +71,9 @@ class App extends Component {
         </nav>
         <MessageList messages = {this.state.messages} currentUser = {this.state.currentUser}/>
         <Chatbar currentUser = {this.state.currentUser} newMessage={this.newMessage} newName={this.newName} />
+        <div style={{ float:"left", clear: "both" }}
+          ref={(el) => { this.messagesEnd = el; }}>
+        </div>
       </div>
     );
   }
