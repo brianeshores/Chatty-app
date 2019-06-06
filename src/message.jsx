@@ -7,9 +7,15 @@ class Message extends Component {
     const style = {
       color: this.props.color
     }
-    console.log("props: ", this.props.color);
+
+    function checkUrl(url){
+      var arr = [ "jpeg", "jpg", "gif", "png" ];
+      var ext = url.substring(url.lastIndexOf(".")+1);
+      return (arr.includes(ext));
+     }
+
     
-    if (this.props.message.type === "incomingMessage") {
+    if (this.props.message.type === "incomingMessage" && !checkUrl(this.props.message.content)) {
       return (
         <div>
           <div className="message">
@@ -17,7 +23,18 @@ class Message extends Component {
             <span className="message-content">{this.props.message.content}</span>
           </div>
         </div>);
-      } else {
+      } 
+      else if (this.props.message.type === "incomingMessage" && checkUrl(this.props.message.content)) {  
+      return (
+        <div>
+          <div className="message">
+            <span style={style} className="message-username">{this.props.message.username}</span>
+            <span className="message-content">{this.props.message.content}</span>
+            <img src={this.props.message.content}/>
+          </div>
+        </div>); 
+    }
+    else {
       return (
         <div>  
           <div className="message system">
