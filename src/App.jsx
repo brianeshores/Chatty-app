@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import MessageList from "./message_list.jsx"
-import Message from "./message.jsx";
 import Chatbar from './chatbar.jsx';
 const URL = 'ws://localhost:3001';
 
@@ -18,10 +17,12 @@ class App extends Component {
   }
   
   socket = new WebSocket(URL);
+  
   componentDidMount() {
+    
     this.socket.onopen= function() {
-      console.log("connected to server")
     }
+    
     this.socket.onmessage = (event) => {
       
       const msg = JSON.parse(event.data);
@@ -32,32 +33,32 @@ class App extends Component {
         this.setState({
           messages: newMessages,
         });
-      } else {
-        this.setState({clientNum: msg.clientNum});
+      } 
+      
+      if (msg.clientColor) {
         this.setState({clientColor: msg.clientColor});
       }
-
+      
+      if (msg.clientNum) {
+        this.setState({clientNum: msg.clientNum});
+      }
     } 
-    // console.log("componentDidMount <App />");
-    // setTimeout(() => {
-    //   console.log("Simulating incoming message");
-    //   const newMessage = {id: 8, username: "Michelle", content: "Hello there!"};
-    //   const messages = this.state.messages.concat(newMessage)
-    //   this.setState({messages: messages})
-    // }, 3000);
   }
 
   newMessage = (type, username, message) => {
+    
     const newMessage = {
       type: type,
       username: username,
       content: message,
       clientColor: this.state.clientColor
     }
+    
     this.socket.send(JSON.stringify(newMessage));
   }
 
   newName = (newName) => {
+    
     this.setState({currentUser: {name: newName}})
   }
 

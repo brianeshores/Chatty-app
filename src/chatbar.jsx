@@ -10,11 +10,13 @@ class Chatbar extends Component {
   }
 
   onUsernameChange = (evt) => {
+    
     this.setState({
       username: evt.target.value,
       type: "postNotification",
       message:`${this.props.currentUser.name} has changed their name to ${evt.target.value}`
     })
+    
     if(evt.keyCode == 13) {
       evt.preventDefault();
       this.props.newName(evt.target.value)
@@ -23,10 +25,12 @@ class Chatbar extends Component {
   }
 
   onMessageChange = (evt) => {
+    
     this.setState({
       message: evt.target.value,
       type: "incomingMessage"
     })
+    
     if(evt.keyCode == 13) {
       evt.preventDefault();
       this.props.newMessage(this.state.type, this.state.username, this.state.message);
@@ -35,6 +39,7 @@ class Chatbar extends Component {
   }  
   
   render() {
+    
     return (
       <div className="chatbar">
         <input className="chatbar-username" placeholder="Your Name (Optional)" onKeyUp={this.onUsernameChange}/>
@@ -43,4 +48,5 @@ class Chatbar extends Component {
     )
   }
 }
+
 export default Chatbar;
