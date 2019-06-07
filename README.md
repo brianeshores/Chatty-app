@@ -1,41 +1,26 @@
-React Boilerplate
+Chatty App
 =====================
 
-A minimal and light dev environment for ReactJS.
+A single page app built using ReactJS that allows multiple users to 
+communicate via web sockets.  It allows for text messages and displays
+images when a image URL is added to the message field.
 
-### Usage
+## Usage
 
-Clone the boilerplate and create your own git repo.
+1. Fork this repository, then clone your fork of this repository.
 
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
+2. Install dependencies using the npm install command.
 
-Install the dependencies and start the server.
+3. To start the web server, open a Terminal window, navigate to /Chatty_app and use the    npm run command. The app will be served at http://localhost:3000/.
 
-```
-npm install
-npm start
-open http://localhost:3000
-```
+4. To start the web socket, open a new Terminal window, navigate to /Chatty_app/           chatty_server and use the npm run command. Any other users who run chatty-app and       connect http://localhost:3000/ will be able to communicate with you.
 
-### Static Files
+5. If you wish, you can start typing messages right away. When another user connects,      the user count will update. Any messages you send at this point will be seen by you     and all other connected users.
 
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
+6. The default username is "Anonymous", but you can change this at any time by typing      out a new username and pressing Enter.
 
 ```
-npm run lint
-```
+
 
 ### Dependencies
 
@@ -43,3 +28,24 @@ npm run lint
 * Webpack
 * [babel-loader](https://github.com/babel/babel-loader)
 * [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+* React-dom
+
+### Dev Dependencies
+
+* @babel/core
+* @babel/preset-env
+* @babel/preset-react
+* babel-core
+* babel-loader
+* babel-preset-es2015
+* babel-preset-react
+* babel-preset-stage-0
+* css-loader
+* eslint
+* eslint-plugin-react
+* node-sass
+* sass-loader
+* sockjs-client
+* style-loader
+* webpack
+* webpack-dev-server
