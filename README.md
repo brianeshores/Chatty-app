@@ -5,7 +5,7 @@ A single page app built using ReactJS that allows multiple users to
 communicate via web sockets.  It allows for text messages and displays
 images when a image URL is added to the message field.
 
-## Usage
+### Usage
 
 1. Fork this repository, then clone your fork of this repository.
 
@@ -19,9 +19,9 @@ images when a image URL is added to the message field.
 
 6. The default username is "Anonymous", but you can change this at any time by typing      out a new username and pressing Enter.
 
-## Screenshots
+### Screenshots
 
-!["Screenshot of Chatty App"] (https://github.com/brianeshores/Chatty-app/blob/master/docs/chatty_app.png)
+!["Screenshot of Chatty App"](https://github.com/brianeshores/Chatty-app/blob/master/docs/chatty_app.png)
 
 ### Dependencies
 
