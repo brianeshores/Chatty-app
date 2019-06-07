@@ -21,6 +21,9 @@ images when a image URL is added to the message field.
 
 ```
 
+## Screenshots
+
+!["Screenshot of Chatty App"](https://github.com/brianeshores/Chatty-app/blob/master/docs/chatty_app.png)
 
 ### Dependencies
 
