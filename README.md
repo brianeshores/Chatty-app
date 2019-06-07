@@ -19,11 +19,9 @@ images when a image URL is added to the message field.
 
 6. The default username is "Anonymous", but you can change this at any time by typing      out a new username and pressing Enter.
 
-```
-
 ## Screenshots
 
-!["Screenshot of Chatty App"](https://github.com/brianeshores/Chatty-app/blob/master/docs/chatty_app.png)
+!["Screenshot of Chatty App"] (https://github.com/brianeshores/Chatty-app/blob/master/docs/chatty_app.png)
 
 ### Dependencies
 
