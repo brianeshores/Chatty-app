@@ -4,11 +4,10 @@ import MessageList from './message_list.jsx'
 class Message extends Component {
   render() {
     const style = {
-      color: this.props.color
+      color: this.props.message.clientColor
     }
     const message = this.props.message;
-
-//checks url on input field to determing if it is an image file
+    
     function checkUrl(url){
       var arr = [ "jpeg", "jpg", "gif", "png" ];
       var ext = url.substring(url.lastIndexOf(".")+1);

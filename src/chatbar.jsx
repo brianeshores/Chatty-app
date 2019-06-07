@@ -13,7 +13,7 @@ class Chatbar extends Component {
     this.setState({
       username: evt.target.value,
       type: "postNotification",
-      message:`${this.props.currentUser.name} has changed their name to ${evt.target.value}`
+      message:`${this.props.currentUser} has changed their name to ${evt.target.value}`
     })
     
     if(evt.keyCode == 13) {

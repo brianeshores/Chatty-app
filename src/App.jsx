@@ -12,7 +12,7 @@ class App extends Component {
       messages: [],
       clientNum: 0,
       clientColor: "",
-      currentUser: {name: "Anonymous"}
+      currentUser: "Anonymous"
     };
   }
   
@@ -22,8 +22,8 @@ class App extends Component {
     this.socket.onmessage = (event) => {
       
       const msg = JSON.parse(event.data);
-
-      if(msg.type) {
+      console.log(msg);
+      if(msg.type === "incomingMessage" || msg.type === "username changed") {
         const oldMessages = this.state.messages;
         const newMessages = [...oldMessages, msg];
         this.setState({
@@ -31,11 +31,11 @@ class App extends Component {
         });
       } 
       
-      if (msg.clientColor) {
+      else if (msg.type === "colorChange") {
         this.setState({clientColor: msg.clientColor});
       }
       
-      if (msg.clientNum) {
+      else if (msg.type === "clientNumChange") {
         this.setState({clientNum: msg.clientNum});
       }
       
@@ -59,7 +59,7 @@ class App extends Component {
   }
 
   newName = (newName) => {
-    this.setState({currentUser: {name: newName}})
+    this.setState({currentUser: newName})
   }
 
   render() {
@@ -70,7 +70,7 @@ class App extends Component {
           <div className="navbar-brand" id="counter">{this.state.clientNum} users online</div>
         </nav>
         <MessageList messages = {this.state.messages} currentUser = {this.state.currentUser}/>
-        <Chatbar currentUser = {this.state.currentUser} newMessage={this.newMessage} newName={this.newName} />
+        <Chatbar currentUser = {this.state.currentUser} newMessage={this.newMessage} newName={this.newName}/>
         <div style={{ float:"left", clear: "both" }}
           ref={(el) => { this.messagesEnd = el; }}>
         </div>
@@ -79,6 +79,5 @@ class App extends Component {
   }
 }
 export default App;
-
 
 

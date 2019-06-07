@@ -21,15 +21,20 @@
       return Math.floor(Math.random() * Math.floor(max));
     }
     
-    const color = ["yellow", "blue", "red", "purple", "green", "grey", "orange"];
-    
-    if (ws.readyState === WebSocket.OPEN) {
-      ws.send(JSON.stringify({clientColor: color[getRandomInt(7)]}));
-    }
+    const color = ["yellow", "blue", "red", "purple", "green", "grey", "orange", "black", "gold"];
+    const clientColor = {
+      clientColor: color[getRandomInt(9)],
+      type: "colorChange"
+    };
+
+    ws.send(JSON.stringify(clientColor));
 
     wss.clients.forEach(function each(client) {
       if (client.readyState === WebSocket.OPEN) {
-        client.send(JSON.stringify({clientNum: wss.clients.size}));
+        client.send(JSON.stringify({
+          clientNum: wss.clients.size,
+          type: "clientNumChange"
+        }));
       }
     });
 
@@ -57,7 +62,10 @@
     ws.on('close', () => {
       wss.clients.forEach(function each(client) {
         if (client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify({clientNum: wss.clients.size}));
+          client.send(JSON.stringify({
+            clientNum: wss.clients.size,
+            type: "clientNumChange"
+          }));
         }
       });
     });
