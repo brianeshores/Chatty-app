@@ -22,7 +22,6 @@ class App extends Component {
     this.socket.onmessage = (event) => {
       
       const msg = JSON.parse(event.data);
-      console.log(msg);
       if(msg.type === "incomingMessage" || msg.type === "username changed") {
         const oldMessages = this.state.messages;
         const newMessages = [...oldMessages, msg];
